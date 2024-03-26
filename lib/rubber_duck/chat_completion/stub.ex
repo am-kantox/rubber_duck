@@ -2,7 +2,15 @@ defmodule RubberDuck.ChatCompletion.Stub do
   @behaviour RubberDuck.ChatCompletion
 
   @impl RubberDuck.ChatCompletion
-  def call(request, opts) do
+  def call(%{messages: messages}, opts) do
+    messages
+    |> Enum.map_join("\n", fn %{role: role, content: content} when role in ~w|user assistant|a ->
+      content
+    end)
+    |> call(opts)
+  end
+
+  def call(request, opts) when is_binary(request) do
     response = "Hi, as a stub code, I can only mirror your request: ‹#{inspect(request)}›"
     {callback, _opts} = Keyword.pop(opts, :callback)
 

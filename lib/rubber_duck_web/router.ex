@@ -18,6 +18,7 @@ defmodule RubberDuckWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+    live "/chats", ChatsLive.Index, :index
   end
 
   scope "/api", RubberDuckWeb do

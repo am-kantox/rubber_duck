@@ -1,4 +1,8 @@
 defmodule RubberDuck.ChatCompletion.OpenAI do
+  @moduledoc """
+  For better handling of OpenAI, see: https://benreinhart.com/blog/openai-streaming-elixir-phoenix-part-2/
+  """
+
   @chat_completions_url "https://api.openai.com/v1/chat/completions"
 
   @behaviour RubberDuck.ChatCompletion
