@@ -7,6 +7,8 @@
 # General application configuration
 import Config
 
+# config :nx, default_backend: EXLA.Backend
+
 config :rubber_duck,
   ecto_repos: [RubberDuck.Repo],
   generators: [timestamp_type: :utc_datetime]

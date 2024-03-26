@@ -60,7 +60,13 @@ defmodule RubberDuck.MixProject do
       {:bandit, "~> 1.2"},
 
       # CUSTOM
-      {:req , "~> 0.4.0"}
+
+      # OpenAI
+      {:req, "~> 0.4.0"},
+
+      # FlanT5
+      {:bumblebee, "~> 0.5"},
+      {:exla, ">= 0.0.0"}
     ]
   end
 
