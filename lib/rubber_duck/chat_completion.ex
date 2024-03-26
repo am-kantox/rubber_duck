@@ -1,7 +1,7 @@
 defmodule RubberDuck.ChatCompletion do
   @moduledoc "Behaviour to be implemented by chat completion engines"
 
-  @callback call(any(), keyword()) :: {:ok, String.t()} | {:error, term}
+  @callback call(binary() | map(), keyword()) :: {:ok, String.t()} | {:error, term}
   @callback to_string(term()) :: String.t()
 
   @optional_callbacks to_string: 1

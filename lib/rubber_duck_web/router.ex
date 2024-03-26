@@ -20,10 +20,11 @@ defmodule RubberDuckWeb.Router do
     get "/", PageController, :home
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", RubberDuckWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", RubberDuckWeb do
+    pipe_through :api
+
+    post "/chat", ChatController, :stream
+  end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
   if Application.compile_env(:rubber_duck, :dev_routes) do

@@ -4,11 +4,30 @@ defmodule RubberDuck.ChatCompletion.OpenAI do
   @behaviour RubberDuck.ChatCompletion
 
   @impl RubberDuck.ChatCompletion
-  def call(request, _opts) do
-    Req.post(@chat_completions_url,
-      json: request,
-      auth: {:bearer, api_key()}
-    )
+  def call(request, opts) when is_binary(request) do
+    call(%{model: "gpt-3.5-turbo", messages: [%{role: "user", content: request}]}, opts)
+  end
+
+  def call(%{} = request, opts) do
+    {callback, _opts} = Keyword.pop(opts, :callback)
+
+    case callback do
+      f when is_function(f, 1) ->
+        Req.post(@chat_completions_url,
+          json: Map.put(request, :stream, true),
+          auth: {:bearer, api_key()},
+          into: fn {:data, data}, context ->
+            callback.(data)
+            {:cont, context}
+          end
+        )
+
+      _ ->
+        Req.post(@chat_completions_url,
+          json: request,
+          auth: {:bearer, api_key()}
+        )
+    end
   end
 
   defp api_key do

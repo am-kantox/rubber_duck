@@ -15,6 +15,9 @@ defmodule RubberDuck.OpenAI.Test do
                  engine: OpenAI
                )
 
+      assert {:ok, %{status: 429, body: ^response}} =
+               RubberDuck.ChatCompletion.call("Hi there!", [], OpenAI)
+
       assert %{"error" => %{"code" => "insufficient_quota"}} = response
     end
   end

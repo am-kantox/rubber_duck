@@ -6,7 +6,7 @@ defmodule RubberDuck.Stub.Test do
 
   describe "echoes the request" do
     test "response" do
-      assert "Hi, as a stub code, I can only mirror your request: ‹Elixir is a›" =
+      assert "Hi, as a stub code, I can only mirror your request: ‹\"Elixir is a\"›" =
                RubberDuck.ChatCompletion.call("Elixir is a", engine: Stub)
     end
   end
